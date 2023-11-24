@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "902390253877",
+    "project_id": "golfy-y1vc9h",
+    "storage_bucket": "golfy-y1vc9h.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902390253877:android:3fc0ea2d0553130741647c",
+        "android_client_info": {
+          "package_name": "com.codeai.golfy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtftl5uK6db4kxzlwKHnhfUIhad5Fy5i8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
