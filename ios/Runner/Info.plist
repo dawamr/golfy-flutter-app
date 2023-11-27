@@ -54,7 +54,8 @@
 	<true/>
 
 
-
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>To provide you with accurate local weather updates and personalized recommendations, Golfy needs access to your location.</string>
 
 
 	<key>UILaunchStoryboardName</key>

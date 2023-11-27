@@ -205,7 +205,11 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(
+        hasTransition: true,
+        transitionType: PageTransitionType.fade,
+        duration: Duration(milliseconds: 0),
+      );
 }
 
 class RootPageContext {

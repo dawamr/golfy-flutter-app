@@ -73,13 +73,16 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget> {
                     if (MediaQuery.sizeOf(context).width <= kBreakpointSmall) {
                       return MediaQuery.sizeOf(context).width;
                     } else if (MediaQuery.sizeOf(context).width <=
+                        kBreakpointMedium) {
+                      return MediaQuery.sizeOf(context).width;
+                    } else if (MediaQuery.sizeOf(context).width <=
                         kBreakpointLarge) {
                       return (MediaQuery.sizeOf(context).width * 0.5);
                     } else {
                       return 425.0;
                     }
                   }(),
-                  390.0,
+                  425.0,
                 ),
                 height: MediaQuery.sizeOf(context).height * 1.0,
                 constraints: BoxConstraints(
@@ -570,6 +573,9 @@ class _EmailLoginWidgetState extends State<EmailLoginWidget> {
               width: valueOrDefault<double>(
                 () {
                   if (MediaQuery.sizeOf(context).width <= kBreakpointSmall) {
+                    return 0.0;
+                  } else if (MediaQuery.sizeOf(context).width <=
+                      kBreakpointLarge) {
                     return 0.0;
                   } else if (MediaQuery.sizeOf(context).width <=
                       kBreakpointLarge) {
