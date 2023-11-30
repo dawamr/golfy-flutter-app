@@ -7,6 +7,8 @@ class EmailLoginModel extends FlutterFlowModel<EmailLoginWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (refreshToken)] action in emailLogin widget.
+  ApiCallResponse? apiResultffd;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;

@@ -29,12 +29,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const OnBoardingWidget(),
+      errorBuilder: (context, state) => const GolfCourseWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const OnBoardingWidget(),
+          builder: (context, _) => const GolfCourseWidget(),
         ),
         FFRoute(
           name: 'onBoarding',
@@ -50,6 +50,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Homepage',
           path: '/homepage',
           builder: (context, params) => const HomepageWidget(),
+        ),
+        FFRoute(
+          name: 'golfCourse',
+          path: '/golfCourse',
+          builder: (context, params) => const GolfCourseWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

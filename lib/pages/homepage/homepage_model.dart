@@ -14,6 +14,8 @@ class HomepageModel extends FlutterFlowModel<HomepageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (geoLocationGmaps)] action in Homepage widget.
+  ApiCallResponse? apiGMapLoc;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
@@ -40,21 +42,6 @@ class HomepageModel extends FlutterFlowModel<HomepageWidget> {
   void clearMeProfileCcCacheKey(String? uniqueKey) =>
       _meProfileCcManager.clearRequest(uniqueKey);
 
-  final _appMenuHomeManager = FutureRequestManager<ApiCallResponse>();
-  Future<ApiCallResponse> appMenuHome({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<ApiCallResponse> Function() requestFn,
-  }) =>
-      _appMenuHomeManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearAppMenuHomeCache() => _appMenuHomeManager.clear();
-  void clearAppMenuHomeCacheKey(String? uniqueKey) =>
-      _appMenuHomeManager.clearRequest(uniqueKey);
-
   /// Initialization and disposal methods.
 
   @override
@@ -69,8 +56,6 @@ class HomepageModel extends FlutterFlowModel<HomepageWidget> {
     /// Dispose query cache managers for this widget.
 
     clearMeProfileCcCache();
-
-    clearAppMenuHomeCache();
   }
 
   /// Action blocks are added here.

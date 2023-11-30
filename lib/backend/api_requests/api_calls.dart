@@ -15,6 +15,9 @@ class CmsGroup {
     'Authorization': 'Bearer [accessToken]',
   };
   static GetAppMenuHomeCall getAppMenuHomeCall = GetAppMenuHomeCall();
+  static RefreshTokenCall refreshTokenCall = RefreshTokenCall();
+  static GetGolfCourseCall getGolfCourseCall = GetGolfCourseCall();
+  static SearchGolfCourseCall searchGolfCourseCall = SearchGolfCourseCall();
 }
 
 class GetAppMenuHomeCall {
@@ -53,6 +56,141 @@ class GetAppMenuHomeCall {
       );
 }
 
+class RefreshTokenCall {
+  Future<ApiCallResponse> call({
+    String? refreshToken =
+        'eG7R8CEjfZ6V6Zkm4wnG0f4JhM20kSFPHjJYhtT45AcPgQR1UrF2fey-QsGMRtW0',
+    String? accessToken = 'g1XUlV2EaBxJG2jvSuu6jaikdXGRjt9m',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "refresh_token": "$refreshToken",
+  "mode": "json"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'refreshToken',
+      apiUrl: '${CmsGroup.baseUrl}/auth/refresh',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic accessToken(dynamic response) => getJsonField(
+        response,
+        r'''$.data.access_token''',
+      );
+  dynamic refreshToken(dynamic response) => getJsonField(
+        response,
+        r'''$.data.refresh_token''',
+      );
+}
+
+class GetGolfCourseCall {
+  Future<ApiCallResponse> call({
+    String? accessToken = 'g1XUlV2EaBxJG2jvSuu6jaikdXGRjt9m',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getGolfCourse',
+      apiUrl: '${CmsGroup.baseUrl}/items/GolfCourse',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+      },
+      params: {
+        'fields':
+            "*,facilities.GolfFacility_id.name,facilities.GolfFacility_id.icon.filename_disk,photo.filename_disk",
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic placeName(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].name''',
+      );
+  dynamic placeCity(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].city''',
+      );
+  dynamic placeCoordinate(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].map.coordinates''',
+        true,
+      );
+  dynamic placeFacility(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].facilities[:].GolfFacility_id''',
+        true,
+      );
+  dynamic dataGolfCourse(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      );
+}
+
+class SearchGolfCourseCall {
+  Future<ApiCallResponse> call({
+    String? search = 'jakarta',
+    String? accessToken = 'g1XUlV2EaBxJG2jvSuu6jaikdXGRjt9m',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'searchGolfCourse',
+      apiUrl: '${CmsGroup.baseUrl}/items/GolfCourse',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+      },
+      params: {
+        'fields':
+            "*,facilities.GolfFacility_id.name,facilities.GolfFacility_id.icon.filename_disk,photo.filename_disk",
+        'filter[_or][0][name][_icontains]': search,
+        'filter[_or][1][city][_icontains]': search,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic placeName(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].name''',
+      );
+  dynamic placeCity(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].city''',
+      );
+  dynamic placeCoordinate(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].map.coordinates''',
+        true,
+      );
+  dynamic placeFacility(dynamic response) => getJsonField(
+        response,
+        r'''$.data[:].facilities[:].GolfFacility_id''',
+        true,
+      );
+  dynamic dataGolfCourse(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      );
+}
+
 /// End CMS Group Code
 
 class EmailLoginCall {
@@ -83,6 +221,10 @@ class EmailLoginCall {
   static dynamic bearerToken(dynamic response) => getJsonField(
         response,
         r'''$.data.access_token''',
+      );
+  static dynamic refreshToken(dynamic response) => getJsonField(
+        response,
+        r'''$.data.refresh_token''',
       );
 }
 

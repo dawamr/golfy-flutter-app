@@ -30,7 +30,13 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('emailLogin');
+      if (FFAppState().firstOnboarding == true) {
+        context.pushNamed('emailLogin');
+      } else {
+        setState(() {
+          FFAppState().firstOnboarding = true;
+        });
+      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -306,8 +312,8 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                   ),
                                   alignment: const AlignmentDirectional(0.00, 1.00),
                                   child: FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      context.pushNamed('emailLogin');
                                     },
                                     text: 'Get Started',
                                     options: FFButtonOptions(

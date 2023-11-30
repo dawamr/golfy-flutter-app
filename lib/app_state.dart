@@ -36,6 +36,14 @@ class FFAppState extends ChangeNotifier {
     await _safeInitAsync(() async {
       _meEmail = await secureStorage.getString('ff_meEmail') ?? _meEmail;
     });
+    await _safeInitAsync(() async {
+      _firstOnboarding =
+          await secureStorage.getBool('ff_firstOnboarding') ?? _firstOnboarding;
+    });
+    await _safeInitAsync(() async {
+      _refreshToken =
+          await secureStorage.getString('ff_refreshToken') ?? _refreshToken;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -45,7 +53,7 @@ class FFAppState extends ChangeNotifier {
 
   late FlutterSecureStorage secureStorage;
 
-  String _accessToken = '';
+  String _accessToken = 'g1XUlV2EaBxJG2jvSuu6jaikdXGRjt9m';
   String get accessToken => _accessToken;
   set accessToken(String value) {
     _accessToken = value;
@@ -98,6 +106,28 @@ class FFAppState extends ChangeNotifier {
 
   void deleteMeEmail() {
     secureStorage.delete(key: 'ff_meEmail');
+  }
+
+  bool _firstOnboarding = false;
+  bool get firstOnboarding => _firstOnboarding;
+  set firstOnboarding(bool value) {
+    _firstOnboarding = value;
+    secureStorage.setBool('ff_firstOnboarding', value);
+  }
+
+  void deleteFirstOnboarding() {
+    secureStorage.delete(key: 'ff_firstOnboarding');
+  }
+
+  String _refreshToken = '';
+  String get refreshToken => _refreshToken;
+  set refreshToken(String value) {
+    _refreshToken = value;
+    secureStorage.setString('ff_refreshToken', value);
+  }
+
+  void deleteRefreshToken() {
+    secureStorage.delete(key: 'ff_refreshToken');
   }
 }
 
